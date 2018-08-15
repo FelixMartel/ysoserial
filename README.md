@@ -51,6 +51,7 @@ Usage: java -jar ysoserial.jar [payload] '[command]'
      C3P0                @mbechler                   c3p0:0.9.5.2, mchange-commons-java:0.2.11
      Clojure             @JackOfMostTrades           clojure:1.8.0
      CommonsBeanutils1   @frohoff                    commons-beanutils:1.9.2, commons-collections:3.1, commons-logging:1.2
+     CommonsBeanutils2   @frohoff                    commons-beanutils:1.9.2, commons-collections:3.1, commons-logging:1.2
      CommonsCollections1 @frohoff                    commons-collections:3.1
      CommonsCollections2 @frohoff                    commons-collections4:4.0
      CommonsCollections3 @frohoff                    commons-collections:3.1
